@@ -1,0 +1,104 @@
+import java.util.*;
+public class VehicleManagement {
+   public static void main(String[] args) {
+      ArrayList<Vehicle> vehicleList = new ArrayList<>();
+      Scanner scanner = new Scanner(System.in);
+   
+      int choice;
+      do {
+         System.out.println("Menu:");
+         System.out.println("1. Add a vehicle");
+         System.out.println("2. Display a list of vehicle details");
+         System.out.println("3. Delete a vehicle");
+         System.out.println("4. Sort vehicle list by age");
+         System.out.println("5. Quit");
+         System.out.print("Enter your choice: ");
+         choice = scanner.nextInt();
+         scanner.nextLine(); 
+      
+         switch (choice) {
+            case 1:
+                    // Add a vehicle
+               System.out.print("Enter registration number: "); 
+               String regNo = scanner.nextLine();
+               System.out.print("Enter make: ");
+               String make = scanner.nextLine(); 
+               System.out.print("Enter year of manufacture: ");
+               int yearOfManufacture = scanner.nextInt(); 
+               System.out.print("Enter value: ");
+               double value = scanner.nextDouble();
+                    
+               Vehicle newVehicle = new Vehicle(regNo, make, yearOfManufacture, value);
+                    
+               vehicleList.add(newVehicle);
+               System.out.println("Vehicle added successfully!");
+               break;
+            case 2:
+                    // Display a list of vehicle details
+               System.out.println("Vehicle Details:");
+               for (Vehicle vehicle : vehicleList) {
+                  System.out.println(vehicle);
+               }
+               break;
+            case 3:
+                    // Delete a vehicle
+               System.out.print("Enter the registration number of the vehicle to delete: ");
+               String regNoToDelete = scanner.nextLine();
+               boolean vehicleDeleted = false;
+               for (Vehicle vehicle : vehicleList) {
+                  if (vehicle.getRegNo().equalsIgnoreCase(regNoToDelete)) {
+                     vehicleList.remove(vehicle);
+                     vehicleDeleted = true;
+                     System.out.println("Vehicle with registration number " + regNoToDelete + " deleted successfully.");
+                     break;
+                  }
+               }
+               if (!vehicleDeleted) {
+                  System.out.println("Vehicle with registration number " + regNoToDelete + " not found.");
+               }
+               break;
+            case 4:
+               while(true) {
+                  System.out.println("\n\nSort Menu:");
+                  System.out.println("1. Sort by age (ascending)");
+                  System.out.println("2. Sort by age (descending)");
+                  System.out.println("3. Back to main menu");
+                  System.out.print("Enter your choice: ");
+                  int sort = scanner.nextInt();
+                  switch (sort) {
+                     case 1:
+                        System.out.println("List of vehicle details sorted by age (ascending):");
+                        Collections.sort(vehicleList, Comparator.comparingInt(Vehicle::getYearOfManufacture));
+                        for(int i = 0; i < vehicleList.size(); i++){
+                           System.out.println(vehicleList.get(i));
+                        }
+                        break;
+                     case 2:
+                        System.out.println("List of vehicle details sorted by age (descending):");
+                        Collections.sort(vehicleList, Comparator.comparingInt(Vehicle::getYearOfManufacture).reversed());
+                        for(int i = 0; i < vehicleList.size(); i++){
+                           System.out.println(vehicleList.get(i));
+                        }
+                        break;
+                     case 3:
+                        System.out.println("Returning to main menu...\n\n");
+                        break;
+                     default:
+                        System.out.println("Invalid choice. Please try again.");
+                  }
+                  if (sort == 3) {
+                     break;
+                  }
+               }
+                                                            
+            case 5:
+               System.out.println("Exiting program...");
+               break;
+            default:
+               System.out.println("Invalid choice. Please try again.");
+         }
+      } while (choice != 5);
+   
+      scanner.close();
+   }
+}
