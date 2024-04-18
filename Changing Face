@@ -109,7 +109,7 @@ public class ChangingFace extends Application {
 });  
         // add the scene to the stage, then set the title
         stage.setScene(scene);
-        stage.setTitle(" by Emmanuel A. Braza");
+        stage.setTitle("Changing Face by Emmanuel A. Braza");
         // show the stage
         stage.show();
     }
