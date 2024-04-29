@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class basicCalculator extends Application
+public class BasicCalculator extends Application
 {
 
    @Override 
